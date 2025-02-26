@@ -69,6 +69,15 @@ def portfolio():
                 next_clicked = st.button("Next ➡", key="next_img")
         with col3:
             st.write("")  # Right spacer
+            
+                # Project Demo Section
+        st.subheader("Project Demo")
+
+        # Video Demo
+        video_path = "Demos/Thesis/thesisdemo1.mp4"
+        st.video(video_path)
+
+
 
         # Update image index if buttons are clicked
         if prev_clicked:
@@ -149,6 +158,18 @@ def portfolio():
                 next_clicked1 = st.button("Next ➡", key="next_img1")
         with col3:
             st.write("")  # Right spacer
+            
+        # Project Demo Section
+        st.subheader("Project Demo")
+
+        # Video Demo
+        video_path = "Demos/Website/websitedemo.mkv"
+        st.video(video_path)
+        
+        st.subheader("Project Details")
+        st.write("")
+        st.write("All the details of this project can be found on my Github Repository. It is a public repository. The link is given below:")
+        st.write("Link: https://github.com/BaxterMojica18/moviewebsite")
 
         # Update image index if buttons are clicked
         if prev_clicked1:
