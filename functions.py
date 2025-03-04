@@ -2,18 +2,7 @@ import streamlit as st
 import os
 import requests
 from pathlib import Path
-from dotenv import load_dotenv
 from streamlit_pdf_viewer import pdf_viewer
-
-# Load .env.local
-load_dotenv(".env.local")
-
-# Access environment variables
-credentials_path = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
-sheet_id = os.getenv("SHEET_ID")
-
-print("Credentials Path:", credentials_path)
-print("Google Sheet ID:", sheet_id)
 
 def list_pdfs(directory):
     """Returns a sorted list of PDF file paths and generates clean labels."""
