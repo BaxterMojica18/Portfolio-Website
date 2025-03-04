@@ -1,5 +1,5 @@
 import streamlit as st
-from functions import get_drive_pdf_links, show_pdf, show_local_pdf, list_pdfs
+from functions import get_drive_pdf_links, show_local_pdf, list_pdfs
 import os
 
 # Local paths for PDFs
