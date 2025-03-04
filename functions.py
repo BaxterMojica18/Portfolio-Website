@@ -2,7 +2,6 @@ import streamlit as st
 import os
 import base64
 from pathlib import Path
-from google.oauth2.service_account import Credentials
 import os
 from dotenv import load_dotenv
 
