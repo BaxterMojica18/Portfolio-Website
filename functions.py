@@ -4,6 +4,18 @@ import base64
 from pathlib import Path
 import gspread
 from google.oauth2.service_account import Credentials
+import os
+from dotenv import load_dotenv
+
+# Load .env.local
+load_dotenv(".env.local")
+
+# Access environment variables
+credentials_path = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
+sheet_id = os.getenv("SHEET_ID")
+
+print("Credentials Path:", credentials_path)
+print("Google Sheet ID:", sheet_id)
 
 def copy_to_clipboard(text):
     """Function to update session state with copied text"""
