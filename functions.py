@@ -2,6 +2,8 @@ import streamlit as st
 import os
 import base64
 from pathlib import Path
+import gspread
+from google.oauth2.service_account import Credentials
 
 def copy_to_clipboard(text):
     """Function to update session state with copied text"""
@@ -14,44 +16,35 @@ def list_pdfs(directory):
     labels = [f"PDF {i+1}" for i in range(len(pdf_files))]  
     return pdf_files, labels
 
-import streamlit as st
-import base64
-from pathlib import Path
+def get_drive_pdf_links(folder_link):
+    """Extracts file links from a shared Google Drive folder."""
+    folder_id = folder_link.split("/")[-1].split("?")[0]  # Extract folder ID
+    drive_api_url = f"https://www.googleapis.com/drive/v3/files?q='{folder_id}'+in+parents&key={st.secrets['GOOGLE_API_KEY']}&fields=files(id,name)"
 
-def show_pdf(pdf_path):
-    """Displays a PDF using Streamlit components (fixing infinite loading)."""
-    
-    # Check if file exists
-    if not Path(pdf_path).is_file():
-        st.error("Error: PDF file not found!")
-        return
-    
-    with open(pdf_path, "rb") as pdf_file:
-        pdf_data = pdf_file.read()
-        base64_pdf = base64.b64encode(pdf_data).decode("utf-8")
+    try:
+        import requests
+        response = requests.get(drive_api_url)
+        if response.status_code == 200:
+            files = response.json().get("files", [])
+            pdf_links = {file["name"]: f"https://drive.google.com/uc?export=view&id={file['id']}" for file in files if file["name"].endswith(".pdf")}
+            return pdf_links
+        else:
+            st.error("Failed to fetch files from Google Drive. Check API Key and folder permissions.")
+            return {}
+    except Exception as e:
+        st.error(f"Error fetching PDFs: {e}")
+        return {}
 
-    # Provide a download button
-    st.download_button(
-        label="📄 Download PDF",
-        data=pdf_data,
-        file_name=Path(pdf_path).name,
-        mime="application/pdf",
-    )
-
-    # Use iframe to load the PDF properly
+def show_pdf(pdf_url):
+    """Embeds a Google Drive PDF in an iframe."""
     pdf_display = f"""
     <iframe 
-        src="data:application/pdf;base64,{base64_pdf}" 
+        src="{pdf_url}" 
         width="700" height="500" 
         style="border: none;"
     ></iframe>
     """
-    
-    # Display the PDF in the Streamlit app
-    st.components.v1.html(pdf_display, height=500, scrolling=True)
-
-
-        
+    st.markdown(pdf_display, unsafe_allow_html=True)
 def get_images(image_folder):
     """Returns a list of image file paths from the given folder."""
     images = sorted([os.path.join(image_folder, img) for img in os.listdir(image_folder) if img.endswith((".png", ".jpg", ".jpeg"))])
