@@ -29,22 +29,30 @@ def get_drive_pdf_links(folder_link):
         st.error(f"Error fetching PDFs: {e}")
         return {}
 
-def show_pdf(pdf_url):
-    """Embeds a Google Drive PDF in an iframe."""
-    pdf_display = f"""
-    <iframe 
-        src="{pdf_url}" 
-        width="700" height="500" 
-        style="border: none;"
-    ></iframe>
-    """
-    st.markdown(pdf_display, unsafe_allow_html=True)
-
 def show_local_pdf(pdf_path):
-    """Displays a local PDF using streamlit_pdf_viewer."""
+    """Displays a local PDF centered using streamlit_pdf_viewer."""
     with open(pdf_path, "rb") as file:
         binary_data = file.read()
+
+    # Center the PDF using custom HTML & CSS
+    st.markdown(
+        """
+        <style>
+        .pdf-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    # Use a div wrapper for centering
+    st.markdown('<div class="pdf-container">', unsafe_allow_html=True)
     pdf_viewer(input=binary_data, width=700)
+    st.markdown("</div>", unsafe_allow_html=True)
 
 def get_images(image_folder):
     """Returns a list of image file paths from the given folder."""
