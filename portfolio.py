@@ -176,3 +176,83 @@ def portfolio():
             st.session_state.movie_index = (current_index - 1) % num_images  # Loop back to last image if at start
         if next_clicked1:
             st.session_state.movie_index = (current_index + 1) % num_images  # Loop back to first image if at end
+            
+    
+ # Another project (example)
+    st.write("")
+    st.write("")
+    st.write("")
+    st.write("")
+    st.subheader("Automatic Silence/Pause Remover")
+    st.write("This is a personal project to help reduce editing time for editors as it removes pauses in a explanation video. This can also be used by students and individuals who edits their own videos as well.")
+
+    # Image Slideshow
+    st.subheader("Project Images")
+
+    image_folder = "images/apr"
+    images = get_images(image_folder)
+
+    if images:
+        # Initialize session state
+        if "acp_index" not in st.session_state:
+            st.session_state.acp_index = 0
+
+        num_images = len(images)
+        current_index = st.session_state.acp_index
+
+        # Load and resize the image to 1280x720
+        image = Image.open(images[current_index])
+        image = image.resize((1280, 720))  # Resize to exact 1280x720
+
+        # Centered Image and Buttons
+        st.markdown(
+            """
+            <style>
+                .image-container {
+                    display: flex;
+                    justify-content: center;
+                }
+                .button-container {
+                    display: flex;
+                    justify-content: center;
+                    gap: 20px;
+                }
+            </style>
+            """,
+            unsafe_allow_html=True
+        )
+
+        st.markdown('<div class="image-container">', unsafe_allow_html=True)
+        st.image(image, width=1280)  # Display resized image
+        st.markdown("</div>", unsafe_allow_html=True)
+
+        # Centered Navigation Buttons
+        st.markdown('<div class="button-container">', unsafe_allow_html=True)
+        
+        # Shortened & Centered Progress Bar
+        progress = (current_index + 1) / num_images  # Normalize between 0 and 1
+        col1, col2, col3 = st.columns([2, 3, 2])  # Centered progress bar
+        with col1:
+            st.write("")
+        with col2:
+            st.progress(progress)  # Shortened width
+        with col3:
+            st.write("")
+            
+        # Project Demo Section
+        st.subheader("Project Demo")
+
+        # Video Demo
+        video_path = "Demos/ACP/demo.mp4"
+        st.video(video_path)
+        
+        st.subheader("Project Details")
+        st.write("")
+        st.write("All the details of this project can be found on my Github Repository. It is a public repository. The link is given below:")
+        st.write("Link: https://github.com/BaxterMojica18/Auto-Cut-Pauses-4Video")
+
+        # Update image index if buttons are clicked
+        if prev_clicked1:
+            st.session_state.acp_index = (current_index - 1) % num_images  # Loop back to last image if at start
+        if next_clicked1:
+            st.session_state.acp_index = (current_index + 1) % num_images  # Loop back to first image if at end
