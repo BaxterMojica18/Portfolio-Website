@@ -1,6 +1,9 @@
 import streamlit as st
 from functions import show_local_pdf
 
+with open("files/Baxter_Mojica_CV.pdf", "rb") as file:
+    cv_bytes = file.read()
+
 def cv():
     st.title("📜 My Curriculum Vitae (CV)")
     col1, col2, col3 = st.columns([1, 3, 1])  # Middle column is wider
@@ -17,3 +20,11 @@ def cv():
     st.write("Work Email: baxterdavid.mojica@gmail.com")
     st.write("")
     st.text_area("My Number", "0967 284 1554", height=68)
+    st.write("")
+    st.write("Download my CV Below")
+    st.download_button(
+        label="📄 Download CV",
+        data=cv_bytes,
+        file_name="Baxter_Mojica_CV.pdf",
+        mime="application/pdf"
+    )
