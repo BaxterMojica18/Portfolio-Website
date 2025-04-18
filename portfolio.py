@@ -12,7 +12,9 @@ def portfolio():
     # Thesis Project
     st.subheader("Thesis Project")
     st.write("This is my thesis project during my college years back last 2024. In our group I was the programmer who created the thesis and made it work, utilizing Python, and using an external or the built-in camera of the chosen device to detect Filipino Sign Language Gestures and convert them to speech for the mute to hear.")
-
+    st.write("")
+    st.write("⭐ Research Week 2024 Institutional 3rd Placers")
+    st.write("⭐ Intellectual Property Conference (IPCON) 2024 De La Salle University Dasmarinas Representatives")
     # Image Slideshow
     st.subheader("Project Images")
 
