@@ -58,3 +58,9 @@ def get_images(image_folder):
     """Returns a list of image file paths from the given folder."""
     images = sorted([os.path.join(image_folder, img) for img in os.listdir(image_folder) if img.endswith((".png", ".jpg", ".jpeg"))])
     return images
+
+def get_images1(image_folder):
+    """Returns a list of image file paths from the given folder."""
+    images = sorted([os.path.join(image_folder, img) for img in os.listdir(image_folder) if img.endswith((".png", ".jpg", ".jpeg"))])
+    return images
+
