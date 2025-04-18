@@ -89,6 +89,7 @@ def portfolio():
 
     else:
         st.write("No images found in the folder.")
+    st.write("____________________________________________________________________")
 
     # Another project (example)
     st.write("")
@@ -178,7 +179,7 @@ def portfolio():
             st.session_state.movie_index = (current_index - 1) % num_images  # Loop back to last image if at start
         if next_clicked1:
             st.session_state.movie_index = (current_index + 1) % num_images  # Loop back to first image if at end
-            
+        st.write("____________________________________________________________________")    
     
  # Another project (example)
     st.write("")
@@ -248,6 +249,7 @@ def portfolio():
             st.session_state.acp_index = (current_index - 1) % num_images  # Loop back to last image if at start
         if next_clicked1:
             st.session_state.acp_index = (current_index + 1) % num_images  # Loop back to first image if at end
+        st.write("____________________________________________________________________")
         
          # Another project (example)
     st.write("")
