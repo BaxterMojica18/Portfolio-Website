@@ -15,7 +15,7 @@ def portfolio():
     st.write("")
     st.write("⭐ Research Week 2024 Institutional 3rd Placers")
     st.write("⭐ Intellectual Property Conference (IPCON) 2024 De La Salle University Dasmarinas Exhibitors")
-    st.write("⭐ Research Week 2025 Guest Presenter")
+    st.write("⭐ Research Week 2025 Resource Speaker / Guest Presenter")
     # Image Slideshow
     st.subheader("Project Images")
 
